@@ -24,7 +24,10 @@
 (defn play-some-games
  ([n]
   (let [r (range 0 n)
-        results (map (fn [_] (play-game)) r)]
-        (frequencies results))))
+        results (map (fn [_] (play-game)) r)
+        lost-won-map (frequencies results)
+        won-count (lost-won-map "won")
+        percent-won (* (/ won-count n) 100.0)]
+        (assoc lost-won-map "percent_won" percent-won))))
 
 (println (play-some-games 100000))
